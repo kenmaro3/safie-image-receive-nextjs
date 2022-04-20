@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  demo:
+    build:
+      context: "."
+      target: "dev"
+    working_dir: "/app"
+    volumes:
+      - "/app/node_modules"
+      - "./:/app"
+    ports:
+      - "3000:3000"
+
+  demo-prod:
+    profiles:
+      - "production"
+    build:
+      context: "."
+      target: "runner"
+    ports:
+      - "80:3000"
